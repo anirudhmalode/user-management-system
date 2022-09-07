@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
+import { addUser } from '../../app/userSlice';
 
 const USERS_DATA_CONSTANTS = {
     NAME: 'name',
@@ -10,6 +13,7 @@ const USERS_DATA_CONSTANTS = {
 }
 
 export default function AddUser() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [userValue, setUserValue] = React.useState({
         name: '',
@@ -24,6 +28,10 @@ export default function AddUser() {
     }
 
     const handleAddUser = () => {
+        dispatch(addUser({
+            ...userValue,
+            id: uuidv4()
+        }));
         setUserValue({
             name: '',
             email: ''

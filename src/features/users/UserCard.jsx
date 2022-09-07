@@ -7,9 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
+import { deleteUser } from '../../app/userSlice';
 
 export default function UserCard({ user }) {
+    const dispatch = useDispatch();
     const firstLetterOfUser = user.name.substring(0, 1).toUpperCase();
+
+    const handleDeleteUser = () => dispatch(deleteUser(user));
 
     return (
         <Card sx={{ maxWidth: 500 }}>
@@ -26,7 +31,7 @@ export default function UserCard({ user }) {
                                 <EditIcon />
                             </IconButton>
                         </Link>
-                        <IconButton aria-label="settings">
+                        <IconButton aria-label="settings" onClick={handleDeleteUser}>
                             <DeleteIcon />
                         </IconButton>
                     </>
