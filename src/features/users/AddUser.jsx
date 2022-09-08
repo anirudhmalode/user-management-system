@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../app/userSlice';
+import './Users.css';
 
 const USERS_DATA_CONSTANTS = {
     NAME: 'name',
@@ -62,7 +63,7 @@ export default function AddUser() {
                 />
             </div>
             <div>
-                <Button variant="outlined" size="small" disabled={disableButton} onClick={handleAddUser}>
+                <Button className='add__user__button' variant="outlined" size="small" disabled={disableButton} onClick={handleAddUser}>
                     Add User
                 </Button>
             </div>

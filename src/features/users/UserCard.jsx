@@ -6,7 +6,6 @@ import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../app/userSlice';
 
@@ -17,22 +16,22 @@ export default function UserCard({ user }) {
     const handleDeleteUser = () => dispatch(deleteUser(user));
 
     return (
-        <Card sx={{ maxWidth: 500 }}>
+        <Card variant='outlined'>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar aria-label="recipe">
                         {firstLetterOfUser}
                     </Avatar>
                 }
                 action={
                     <>
                         <Link underline="none" to={`/edit-user/${user.id}`}>
-                            <IconButton aria-label="settings">
-                                <EditIcon />
+                            <IconButton size='small' aria-label="settings">
+                                <EditIcon fontSize='small' />
                             </IconButton>
                         </Link>
-                        <IconButton aria-label="settings" onClick={handleDeleteUser}>
-                            <DeleteIcon />
+                        <IconButton size='small' aria-label="settings" onClick={handleDeleteUser}>
+                            <DeleteIcon fontSize='small' />
                         </IconButton>
                     </>
                 }

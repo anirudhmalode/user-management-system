@@ -16,15 +16,15 @@ export default function EditUser() {
     const dispatch = useDispatch();
     const users = useSelector(store => store.users);
     const navigate = useNavigate();
-    const existingUser = users.filter(user => user.id === params.id);
-    const { name, email } = existingUser[0];
+    const existingUser = users.find(user => user.id === parseInt(params.id));
+
+    const { name, email } = existingUser;
     const [values, setValues] = useState({
         name,
         email
     });
 
     const handleInputChange = (fieldName, value) => {
-        dispatch(editUser(values));
         setValues({
             ...values,
             [fieldName]: value
@@ -32,6 +32,11 @@ export default function EditUser() {
     }
 
     const handleEditUser = () => {
+        dispatch(editUser({
+            id: params.id,
+            name: values.name,
+            email: values.email
+        }));
         setValues({
             name: '',
             email: ''
@@ -63,7 +68,7 @@ export default function EditUser() {
             </div>
             <div>
                 <Button variant="outlined" size="small" disabled={disableButton} onClick={handleEditUser}>
-                    Add User
+                    Edit User
                 </Button>
             </div>
         </Box>

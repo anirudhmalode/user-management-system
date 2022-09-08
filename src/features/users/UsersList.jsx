@@ -3,24 +3,27 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import UserCard from './UserCard';
 import Button from '@mui/material/Button';
-// import { mockUsers } from '../../shared/mock';
+import Grid from '@mui/material/Grid';
+import './Users.css';
 
 const UsersList = () => {
     const users = useSelector((store) => store.users);
-    console.log("ALL USERS -->", users);
 
     return (
         <div>
-            <Link underline="none" to="/add-user">
-                <Button variant="outlined" size="small">
+            <Link to="/add-user">
+                <Button className='add__user__button' variant="contained" size="small">
                     Add User
                 </Button>
             </Link>
-            <div>
-                {(users || []).length > 0 ? (users || []).map(user => <div key={user.id}>
-                    <UserCard user={user} />
-                </div>) : <p> No User! </p>}
-            </div>
+            <Grid container spacing={2}>
+                {(users || []).length > 0 ? (users || []).map(user =>
+                    <Grid key={user.id} item xs={4}>
+                        <UserCard user={user} />
+                    </Grid>
+                ) : <p> No User! </p>}
+
+            </Grid>
         </div>
     )
 }
